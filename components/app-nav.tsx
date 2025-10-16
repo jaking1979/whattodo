@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import { Plus, Search, Package, List as ListIcon, Store } from 'lucide-react'
+import { Search, Package, List as ListIcon, Store } from 'lucide-react'
+import { QuickAddButton } from './quick-add-button'
 import type { User } from '@supabase/supabase-js'
 
 interface AppNavProps {
@@ -38,9 +39,7 @@ export function AppNav({ user, profile }: AppNavProps) {
             <button className="text-foreground">
               <Search className="h-6 w-6" />
             </button>
-            <button className="flex items-center justify-center bg-primary text-white rounded-full w-10 h-10 shadow-lg">
-              <Plus className="h-6 w-6" />
-            </button>
+            <QuickAddButton />
           </div>
         </div>
         <div className="px-4">

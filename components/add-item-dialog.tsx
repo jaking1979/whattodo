@@ -1,32 +1,67 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Package, List } from 'lucide-react'
 import { createItem } from '@/app/actions/items'
+import { createList, getLists } from '@/app/actions/lists'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 interface AddItemDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   listId?: string
-  defaultList?: 'inbox' | 'choose'
 }
 
-export function AddItemDialog({ open, onOpenChange, listId, defaultList = 'inbox' }: AddItemDialogProps) {
+export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps) {
+  const router = useRouter()
   const [query, setQuery] = useState('')
   const [notes, setNotes] = useState('')
-  const [selectedList, setSelectedList] = useState(listId || 'inbox')
+  const [selectedListId, setSelectedListId] = useState<string | null>(listId || null)
   const [loading, setLoading] = useState(false)
+  const [inboxId, setInboxId] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Get or create inbox list
+    const getInbox = async () => {
+      const result = await getLists()
+      if (result.data) {
+        const inbox = (result.data as any[]).find((list: any) => list.title === 'Inbox')
+        if (inbox) {
+          setInboxId(inbox.id)
+          if (!listId) {
+            setSelectedListId(inbox.id)
+          }
+        } else {
+          // Create inbox
+          const createResult = await createList({
+            title: 'Inbox',
+            description: 'Quick capture - sort these later',
+            visibility: 'private',
+          })
+          if (createResult.data) {
+            setInboxId((createResult.data as any).id)
+            if (!listId) {
+              setSelectedListId((createResult.data as any).id)
+            }
+          }
+        }
+      }
+    }
+    if (open) {
+      getInbox()
+    }
+  }, [open, listId])
 
   const handleSubmit = async () => {
-    if (!query.trim()) return
+    if (!query.trim() || !selectedListId) return
 
     setLoading(true)
     try {
       // For now, create a simple item without metadata lookup
       const result = await createItem({
-        list_id: selectedList,
+        list_id: selectedListId,
         type: 'link',
         title: query,
         url: query.startsWith('http') ? query : undefined,
@@ -41,6 +76,7 @@ export function AddItemDialog({ open, onOpenChange, listId, defaultList = 'inbox
         setQuery('')
         setNotes('')
         onOpenChange(false)
+        router.refresh()
       }
     } catch (error) {
       toast.error('Failed to add item')
@@ -71,9 +107,10 @@ export function AddItemDialog({ open, onOpenChange, listId, defaultList = 'inbox
 
           <div className="space-y-2 mb-5">
             <button
-              onClick={() => setSelectedList('inbox')}
+              onClick={() => inboxId && setSelectedListId(inboxId)}
+              disabled={!inboxId}
               className={`w-full flex items-center gap-4 p-3 rounded-lg text-left ${
-                selectedList === 'inbox'
+                selectedListId === inboxId
                   ? 'bg-primary/20 dark:bg-primary/30'
                   : 'hover:bg-primary/10'
               }`}
@@ -82,18 +119,18 @@ export function AddItemDialog({ open, onOpenChange, listId, defaultList = 'inbox
                 <Package className="h-5 w-5 text-primary" />
               </div>
               <span className="font-medium flex-1">Inbox</span>
-              {selectedList === 'inbox' && (
+              {selectedListId === inboxId && (
                 <svg className="text-primary" fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"></path>
                 </svg>
               )}
             </button>
 
-            <button className="w-full flex items-center gap-4 p-3 rounded-lg text-left hover:bg-primary/10">
+            <button className="w-full flex items-center gap-4 p-3 rounded-lg text-left hover:bg-primary/10" disabled>
               <div className="w-10 h-10 flex items-center justify-center bg-primary/20 dark:bg-primary/30 rounded-lg">
                 <List className="h-5 w-5 text-primary" />
               </div>
-              <span className="font-medium">Move to List...</span>
+              <span className="font-medium opacity-50">Move to List... (coming soon)</span>
             </button>
           </div>
 
@@ -116,7 +153,7 @@ export function AddItemDialog({ open, onOpenChange, listId, defaultList = 'inbox
             </button>
             <button
               onClick={handleSubmit}
-              disabled={loading || !query.trim()}
+              disabled={loading || !query.trim() || !selectedListId}
               className="flex-1 py-3 px-4 rounded-lg bg-primary text-white font-bold text-center disabled:opacity-50"
             >
               {loading ? 'Adding...' : 'Add to Inbox'}

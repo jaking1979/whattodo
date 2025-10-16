@@ -19,8 +19,11 @@ export function InstallPrompt() {
       (window.navigator as any).standalone ||
       document.referrer.includes('android-app://')
 
+    console.log('InstallPrompt: isStandalone =', isStandalone)
+
     if (isStandalone) {
       // App is already installed, don't show prompt
+      console.log('InstallPrompt: App is standalone, not showing')
       return
     }
 
@@ -30,14 +33,18 @@ export function InstallPrompt() {
       const dismissedDate = new Date(dismissed)
       const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24)
       
+      console.log('InstallPrompt: Days since dismissed =', daysSinceDismissed)
+      
       // Show again after 7 days
       if (daysSinceDismissed < 7) {
+        console.log('InstallPrompt: Recently dismissed, not showing')
         return
       }
     }
 
     // Listen for the beforeinstallprompt event
     const handleBeforeInstallPrompt = (e: Event) => {
+      console.log('InstallPrompt: beforeinstallprompt event fired')
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault()
       // Stash the event so it can be triggered later
@@ -48,15 +55,18 @@ export function InstallPrompt() {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
 
-    // For iOS Safari (doesn't support beforeinstallprompt)
+    // For iOS Safari or if beforeinstallprompt hasn't fired yet
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
     const isInStandaloneMode = (window.navigator as any).standalone
     
-    if (isIOS && !isInStandaloneMode && !dismissed) {
-      // Show iOS-specific prompt after a short delay
+    console.log('InstallPrompt: isIOS =', isIOS, 'isInStandaloneMode =', isInStandaloneMode)
+    
+    // Show prompt after a delay if not iOS standalone and not recently dismissed
+    if (!isInStandaloneMode && !dismissed) {
       setTimeout(() => {
+        console.log('InstallPrompt: Showing prompt after delay')
         setShowPrompt(true)
-      }, 2000)
+      }, 3000) // Show after 3 seconds
     }
 
     return () => {

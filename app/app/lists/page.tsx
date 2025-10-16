@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
-import { Plus } from 'lucide-react'
 import Link from 'next/link'
+import { NewListButton } from '@/components/new-list-button'
 
 export default async function ListsPage() {
   const supabase = await createClient()
@@ -78,10 +78,7 @@ export default async function ListsPage() {
       </main>
 
       <div className="md:hidden sticky bottom-16 z-10 p-4">
-        <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 text-base font-bold text-white shadow-lg shadow-primary/30 transition-transform active:scale-95">
-          <Plus className="h-5 w-5" />
-          <span>New List</span>
-        </button>
+        <NewListButton />
       </div>
     </>
   )
