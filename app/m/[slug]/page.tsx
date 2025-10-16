@@ -1,8 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import { ChevronLeft, Heart, Bookmark, RefreshCcw } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { LikeButton } from '@/components/like-button'
+import { SaveButton } from '@/components/save-button'
+import { RemixButton } from '@/components/remix-button'
 
 export default async function MarketplaceListingPage({
   params,
@@ -77,20 +80,20 @@ export default async function MarketplaceListingPage({
           </div>
 
           <div className="flex gap-2">
-            <button className="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl bg-card border border-border hover:bg-primary/10">
-              <Heart className="h-5 w-5" />
-              <span className="font-semibold">{likesCount}</span>
-            </button>
-            <button className="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl bg-card border border-border hover:bg-primary/10">
-              <Bookmark className="h-5 w-5" />
-              <span className="font-semibold">{savesCount}</span>
-            </button>
+            <LikeButton
+              listingId={listingData.id}
+              initialCount={likesCount}
+            />
+            <SaveButton
+              listingId={listingData.id}
+              initialCount={savesCount}
+            />
           </div>
 
-          <button className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-colors">
-            <RefreshCcw className="h-5 w-5" />
-            <span>Remix This List</span>
-          </button>
+          <RemixButton
+            listId={listingData.list_id}
+            listTitle={listingData.title}
+          />
 
           <div className="space-y-2">
             <h3 className="text-lg font-bold">Items ({items.length})</h3>

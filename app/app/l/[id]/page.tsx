@@ -1,9 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Edit, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ItemMenu } from '@/components/item-menu'
+import { ListVisibilityToggle } from '@/components/list-visibility-toggle'
+import { PublishButton } from '@/components/publish-button'
+import { ShareListButton } from '@/components/share-list-button'
+import { EditListButton } from '@/components/edit-list-button'
+import { DeleteListButton } from '@/components/delete-list-button'
 
 export default async function ListDetailPage({
   params,
@@ -34,6 +39,13 @@ export default async function ListDetailPage({
     redirect('/app/lists')
   }
 
+  // Get user profile for sharing
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('handle')
+    .eq('id', user.id)
+    .single()
+
   const items = (list as any).items || []
   const listData = list as any
 
@@ -49,21 +61,38 @@ export default async function ListDetailPage({
           <h1 className="text-lg font-bold absolute left-1/2 -translate-x-1/2">
             {listData.title}
           </h1>
-          {listData.visibility === 'public' && (
-            <button className="px-4 h-9 flex items-center justify-center rounded-lg bg-primary text-white font-semibold text-sm">
-              Publish
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {listData.visibility === 'public' && (
+              <PublishButton
+                listId={id}
+                listTitle={listData.title}
+                isPublic={listData.visibility === 'public'}
+              />
+            )}
+            <ShareListButton
+              listSlug={listData.slug}
+              listTitle={listData.title}
+              handle={(profile as any)?.handle || ''}
+              visibility={listData.visibility}
+            />
+            <EditListButton
+              listId={id}
+              currentTitle={listData.title}
+              currentDescription={listData.description}
+              currentTags={listData.tags}
+            />
+            <DeleteListButton
+              listId={id}
+              listTitle={listData.title}
+              itemCount={items.length}
+            />
+          </div>
         </div>
         <div className="px-4">
-          <div className="flex border-b border-border/50">
-            <a className="flex-1 py-3 text-center text-sm font-semibold border-b-2 border-primary text-primary" href="#">
-              Private
-            </a>
-            <a className="flex-1 py-3 text-center text-sm font-semibold border-b-2 border-transparent text-muted-foreground hover:text-primary transition-colors" href="#">
-              Public
-            </a>
-          </div>
+          <ListVisibilityToggle
+            listId={id}
+            currentVisibility={listData.visibility}
+          />
         </div>
       </header>
 

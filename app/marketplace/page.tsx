@@ -1,7 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
-import { ChevronDown, Heart, Bookmark } from 'lucide-react'
+import { Heart, Bookmark } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Suspense } from 'react'
+import { ExchangeSearch } from '@/components/exchange-search'
+import { ExchangeFilters } from '@/components/exchange-filters'
 
 export default async function MarketplacePage({
   searchParams,
@@ -53,25 +56,13 @@ export default async function MarketplacePage({
 
   return (
     <>
-      <div className="px-4 pt-2 pb-4">
-        <div className="flex space-x-2">
-          <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 px-4 text-sm font-medium text-primary dark:bg-primary/30">
-            <span>Type</span>
-            <ChevronDown className="h-4 w-4" />
-          </button>
-          <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 px-4 text-sm font-medium text-primary dark:bg-primary/30">
-            <span>Tags</span>
-            <ChevronDown className="h-4 w-4" />
-          </button>
-        </div>
-        <div className="flex space-x-2 pt-2">
-          <button className="flex h-10 shrink-0 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-white">
-            <span>Trending</span>
-          </button>
-          <button className="flex h-10 shrink-0 items-center justify-center rounded-lg bg-primary/20 px-4 text-sm font-medium text-primary dark:bg-primary/30">
-            <span>New</span>
-          </button>
-        </div>
+      <div className="px-4 pt-4 pb-4 space-y-4">
+        <Suspense fallback={<div className="h-12 bg-primary/10 rounded-lg animate-pulse" />}>
+          <ExchangeSearch />
+        </Suspense>
+        <Suspense fallback={<div className="h-10 bg-primary/10 rounded-lg animate-pulse" />}>
+          <ExchangeFilters />
+        </Suspense>
       </div>
 
       <div className="space-y-4 p-4 pb-28">

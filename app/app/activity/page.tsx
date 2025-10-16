@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Image from 'next/image'
+import { ItemMenu } from '@/components/item-menu'
 
 export default async function ActivityPage() {
   const supabase = await createClient()
@@ -77,8 +78,17 @@ export default async function ActivityPage() {
                       {new Date(item.completed_at).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="text-sm px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
-                    Done
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                      Done
+                    </div>
+                    <ItemMenu
+                      itemId={item.id}
+                      itemTitle={item.title}
+                      currentStatus={item.status}
+                      currentNotes={item.notes}
+                      listId={item.list_id}
+                    />
                   </div>
                 </div>
               )

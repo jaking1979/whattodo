@@ -1,17 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { Package, List } from 'lucide-react'
+import { Package, List, Loader2 } from 'lucide-react'
 import { createItem } from '@/app/actions/items'
 import { createList, getLists } from '@/app/actions/lists'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 interface AddItemDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   listId?: string
+}
+
+interface SearchResult {
+  title: string
+  type: string
+  source: string
+  source_id: string
+  url: string
+  metadata: any
 }
 
 export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps) {
@@ -21,6 +31,9 @@ export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps
   const [selectedListId, setSelectedListId] = useState<string | null>(listId || null)
   const [loading, setLoading] = useState(false)
   const [inboxId, setInboxId] = useState<string | null>(null)
+  const [searching, setSearching] = useState(false)
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null)
 
   useEffect(() => {
     // Get or create inbox list
@@ -54,19 +67,56 @@ export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps
     }
   }, [open, listId])
 
+  // Debounced search
+  useEffect(() => {
+    if (!query.trim() || query.length < 3) {
+      setSearchResults([])
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setSearching(true)
+      try {
+        const response = await fetch(`/api/lookup?query=${encodeURIComponent(query)}`)
+        const data = await response.json()
+        setSearchResults(data.results || [])
+      } catch (error) {
+        console.error('Search error:', error)
+        setSearchResults([])
+      } finally {
+        setSearching(false)
+      }
+    }, 500) // 500ms debounce
+
+    return () => clearTimeout(timer)
+  }, [query])
+
   const handleSubmit = async () => {
-    if (!query.trim() || !selectedListId) return
+    if (!selectedListId) return
+
+    const itemToAdd = selectedResult || {
+      title: query,
+      type: 'link' as const,
+      url: query.startsWith('http') ? query : undefined,
+      source: 'manual',
+      source_id: null,
+      metadata: null,
+    }
+
+    if (!itemToAdd.title?.trim()) return
 
     setLoading(true)
     try {
-      // For now, create a simple item without metadata lookup
       const result = await createItem({
         list_id: selectedListId,
-        type: 'link',
-        title: query,
-        url: query.startsWith('http') ? query : undefined,
+        type: itemToAdd.type as any,
+        title: itemToAdd.title,
+        url: itemToAdd.url || undefined,
+        source: itemToAdd.source || undefined,
+        source_id: itemToAdd.source_id || undefined,
         status: 'saved',
         notes: notes || undefined,
+        metadata: itemToAdd.metadata || undefined,
       })
 
       if (result.error) {
@@ -75,6 +125,8 @@ export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps
         toast.success('Item added successfully')
         setQuery('')
         setNotes('')
+        setSearchResults([])
+        setSelectedResult(null)
         onOpenChange(false)
         router.refresh()
       }
@@ -96,14 +148,84 @@ export function AddItemDialog({ open, onOpenChange, listId }: AddItemDialogProps
           <h2 className="text-xl font-bold mb-4">Add an item</h2>
           
           <div className="mb-5">
-            <input
-              className="w-full bg-primary/10 dark:bg-primary/20 border-none rounded-lg h-14 px-4 placeholder:text-foreground/50 focus:ring-2 focus:ring-primary"
-              placeholder="Paste a URL or search"
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                className="w-full bg-primary/10 dark:bg-primary/20 border-none rounded-lg h-14 px-4 placeholder:text-foreground/50 focus:ring-2 focus:ring-primary"
+                placeholder="Paste a URL or search"
+                type="text"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value)
+                  setSelectedResult(null)
+                }}
+              />
+              {searching && (
+                <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                  <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Search Results */}
+          {searchResults.length > 0 && !selectedResult && (
+            <div className="mb-5 space-y-2 max-h-64 overflow-y-auto">
+              <h3 className="text-sm font-semibold text-muted-foreground">Select a result:</h3>
+              {searchResults.map((result, index) => {
+                const poster = result.metadata?.poster || result.metadata?.cover || result.metadata?.artwork
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedResult(result)}
+                    className="w-full flex items-center gap-4 p-2 rounded-lg hover:bg-primary/10 text-left"
+                  >
+                    {poster && (
+                      <div className="w-14 h-14 rounded-lg relative overflow-hidden flex-shrink-0">
+                        <Image
+                          src={poster}
+                          alt={result.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">{result.title}</p>
+                      <p className="text-sm text-muted-foreground capitalize">
+                        {result.type}
+                        {result.metadata?.release_date && ` • ${new Date(result.metadata.release_date).getFullYear()}`}
+                        {result.metadata?.first_publish_year && ` • ${result.metadata.first_publish_year}`}
+                        {result.metadata?.rating && ` • ⭐ ${result.metadata.rating.toFixed(1)}`}
+                      </p>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Selected Result Preview */}
+          {selectedResult && (
+            <div className="mb-5">
+              <h3 className="text-lg font-bold mb-2">Selected item</h3>
+              <div className="flex items-center gap-4 p-2 rounded-lg bg-primary/10">
+                {(selectedResult.metadata?.poster || selectedResult.metadata?.cover || selectedResult.metadata?.artwork) && (
+                  <div className="w-14 h-14 rounded-lg relative overflow-hidden">
+                    <Image
+                      src={selectedResult.metadata.poster || selectedResult.metadata.cover || selectedResult.metadata.artwork}
+                      alt={selectedResult.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex-1">
+                  <p className="font-medium">{selectedResult.title}</p>
+                  <p className="text-sm text-muted-foreground capitalize">{selectedResult.type}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="space-y-2 mb-5">
             <button

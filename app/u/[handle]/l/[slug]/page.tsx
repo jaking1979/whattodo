@@ -1,8 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import { ChevronLeft, Share2, RefreshCcw } from 'lucide-react'
+import { ChevronLeft, Share2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { RemixButton } from '@/components/remix-button'
 import type { Metadata } from 'next'
 
 type Props = {
@@ -110,10 +111,10 @@ export default async function PublicListPage({ params }: Props) {
             </div>
           </div>
 
-          <button className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-colors">
-            <RefreshCcw className="h-5 w-5" />
-            <span>Remix This List</span>
-          </button>
+          <RemixButton
+            listId={listData.id}
+            listTitle={listData.title}
+          />
 
           <div className="space-y-2">
             {items.length === 0 ? (

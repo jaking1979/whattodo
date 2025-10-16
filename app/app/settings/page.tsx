@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
-import { ChevronLeft, ChevronRight, User, Mail, Download, Trash2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Mail, Download } from 'lucide-react'
 import Link from 'next/link'
+import { EditProfileButton } from '@/components/edit-profile-button'
+import { DeleteAccountButton } from '@/components/delete-account-button'
 
 export default async function SettingsPage() {
   const supabase = await createClient()
@@ -34,16 +36,11 @@ export default async function SettingsPage() {
           <h2 className="px-4 text-sm font-bold tracking-wider uppercase text-muted-foreground">Account</h2>
           <div className="bg-card/30 dark:bg-card/10 rounded-xl shadow-sm">
             <ul className="divide-y divide-border/20">
-              <li className="flex items-center gap-4 p-4 hover:bg-primary/10 rounded-t-xl">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
-                  <User className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium">Profile</p>
-                  <p className="text-sm text-muted-foreground">@{(profile as any)?.handle}</p>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </li>
+              <EditProfileButton
+                handle={(profile as any)?.handle || ''}
+                displayName={(profile as any)?.display_name}
+                avatarUrl={(profile as any)?.avatar_url}
+              />
               <li className="flex items-center gap-4 p-4 hover:bg-primary/10 rounded-b-xl">
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
                   <Mail className="h-5 w-5" />
@@ -74,16 +71,7 @@ export default async function SettingsPage() {
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
                 </Link>
               </li>
-              <li className="flex items-center gap-4 p-4 hover:bg-destructive/10 rounded-b-xl">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-destructive/20 text-destructive">
-                  <Trash2 className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium text-destructive">Delete Account</p>
-                  <p className="text-sm text-muted-foreground">Permanently delete your account</p>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </li>
+              <DeleteAccountButton />
             </ul>
           </div>
         </section>
