@@ -205,6 +205,10 @@ MIT
 
 For issues or questions, please open a GitHub issue.
 
+## 🌐 Live App
+
+Visit: **https://whattodo.vercel.app**
+
 ---
 
 Built with ❤️ using Next.js and Supabase
