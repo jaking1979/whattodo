@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<title>WhatToDo - Publish List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#18b9a9",
+            "background-light": "#f6f8f8",
+            "background-dark": "#11211f",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .form-input, .form-textarea, .form-select {
+        border-color: transparent;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+        --tw-ring-color: transparent;
+        border-color: transparent;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="fixed inset-0 bg-black/50 flex justify-center items-end">
+<div class="w-full max-w-lg bg-background-light dark:bg-background-dark rounded-t-xl shadow-lg flex flex-col">
+<div class="py-2 flex justify-center">
+<div class="w-10 h-1.5 rounded-full bg-primary/20 dark:bg-primary/30"></div>
+</div>
+<div class="px-6 pt-4 pb-2">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Publish List</h2>
+</div>
+<div class="px-6 py-4 space-y-4 overflow-y-auto">
+<div>
+<label class="sr-only" for="title">Title</label>
+<input class="w-full h-14 bg-primary/10 dark:bg-primary/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-lg px-4 text-base focus:ring-primary" id="title" name="title" placeholder="Title" type="text"/>
+</div>
+<div>
+<label class="sr-only" for="summary">Summary</label>
+<textarea class="w-full min-h-[96px] bg-primary/10 dark:bg-primary/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-lg p-4 text-base resize-none focus:ring-primary" id="summary" name="summary" placeholder="Summary"></textarea>
+</div>
+<div>
+<label class="sr-only" for="category">Category</label>
+<select class="w-full h-14 bg-primary/10 dark:bg-primary/20 text-gray-900 dark:text-white rounded-lg px-4 text-base appearance-none focus:ring-primary" id="category" name="category" style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e&quot;); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em;">
+<option selected="">Category</option>
+<option value="movies">Movies</option>
+<option value="books">Books</option>
+<option value="games">Games</option>
+<option value="podcasts">Podcasts</option>
+</select>
+</div>
+<div>
+<label class="sr-only" for="tags">Tags</label>
+<input class="w-full h-14 bg-primary/10 dark:bg-primary/20 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-lg px-4 text-base focus:ring-primary" id="tags" name="tags" placeholder="Tags (comma-separated)" type="text"/>
+</div>
+<div class="flex items-center justify-between py-2">
+<span class="text-base text-gray-900 dark:text-white">Indexable for Marketplace</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-primary/20 peer-focus:outline-none rounded-full peer dark:bg-primary/30 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="px-6 pt-4 pb-6">
+<button class="w-full h-12 bg-primary text-white rounded-lg text-base font-bold flex items-center justify-center" type="button">
+            Publish
+        </button>
+</div>
+</div>
+</div>
+
+</body></html>

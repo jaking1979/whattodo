@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WhatToDo - Inbox</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#18b9a9",
+              "background-light": "#f6f8f8",
+              "background-dark": "#11211f",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a3230",
+              "text-primary-light": "#11211f",
+              "text-primary-dark": "#f6f8f8",
+              "text-secondary-light": "#6b7280",
+              "text-secondary-dark": "#9ca3af",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px",
+            },
+            spacing: {
+              "1": "0.25rem",
+              "2": "0.5rem",
+              "3": "0.75rem",
+              "4": "1rem",
+              "5": "1.25rem",
+              "6": "1.5rem",
+              "8": "2rem",
+              "12": "3rem",
+            },
+            boxShadow: {
+              soft: "0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center justify-between p-4">
+<div class="w-12"></div>
+<h1 class="text-lg font-bold text-center">The Pile</h1>
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> settings </span>
+</button>
+</div>
+<div class="px-4 pb-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary-light dark:text-text-secondary-dark"> search </span>
+<input class="w-full h-12 pl-12 pr-4 rounded-xl border-none bg-surface-light dark:bg-surface-dark placeholder:text-text-secondary-light placeholder:dark:text-text-secondary-dark focus:ring-2 focus:ring-primary" placeholder="Paste a link or search" type="text"/>
+</div>
+</div>
+</header>
+<main class="flex-grow p-4 space-y-4">
+<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-soft">
+<div class="flex items-center gap-4">
+<div class="flex-grow min-w-0">
+<p class="text-sm font-semibold truncate">The Midnight Bloom</p>
+<span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Movie</span>
+</div>
+<button class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> more_vert </span>
+</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-soft">
+<div class="flex items-center gap-4">
+<div class="flex-grow min-w-0">
+<p class="text-sm font-semibold truncate">Echoes of the Past</p>
+<span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Book</span>
+</div>
+<button class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> more_vert </span>
+</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-soft">
+<div class="flex items-center gap-4">
+<div class="flex-grow min-w-0">
+<p class="text-sm font-semibold truncate">Tech Trends Today</p>
+<span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Podcast</span>
+</div>
+<button class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> more_vert </span>
+</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-soft">
+<div class="flex items-center gap-4">
+<div class="flex-grow min-w-0">
+<p class="text-sm font-semibold truncate">Starlight Odyssey</p>
+<span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Game</span>
+</div>
+<button class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> more_vert </span>
+</button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-soft">
+<div class="flex items-center gap-4">
+<div class="flex-grow min-w-0">
+<p class="text-sm font-semibold truncate">Innovations in Sustainable Energy</p>
+<span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">Link</span>
+</div>
+<button class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10">
+<span class="material-symbols-outlined"> more_vert </span>
+</button>
+</div>
+</div>
+</main>
+<footer class="sticky bottom-0 bg-surface-light dark:bg-surface-dark border-t border-background-dark/20 dark:border-background-light/10">
+<nav class="flex justify-around p-2">
+<a class="flex flex-col items-center justify-center w-24 h-16 rounded-lg text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"> inbox </span>
+<span class="text-xs font-medium">Inbox</span>
+</a>
+<a class="flex flex-col items-center justify-center w-24 h-16 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined"> list_alt </span>
+<span class="text-xs font-medium">Lists</span>
+</a>
+<a class="flex flex-col items-center justify-center w-24 h-16 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined"> storefront </span>
+<span class="text-xs font-medium">Market</span>
+</a>
+</nav>
+<div class="h-safe-area-bottom bg-surface-light dark:bg-surface-dark"></div>
+</footer>
+</div>
+
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WhatToDo - My Lists</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#18b9a9",
+              "background-light": "#f6f8f8",
+              "background-dark": "#11211f",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center p-4">
+<div class="flex-1">
+<button class="text-slate-600 dark:text-slate-400">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,64H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+</svg>
+</button>
+</div>
+<h1 class="flex-1 text-center text-lg font-bold text-slate-900 dark:text-white">My Lists</h1>
+<div class="flex-1"></div>
+</div>
+</header>
+<main class="flex-grow p-4">
+<div class="grid grid-cols-1 gap-4">
+<div class="flex flex-col gap-4 rounded-xl bg-slate-100/5 dark:bg-slate-800/20 p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold text-slate-900 dark:text-white">Watchlist</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">12 items</p>
+<p class="text-xs text-slate-400 dark:text-slate-500">Updated 2d ago</p>
+</div>
+<span class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary dark:bg-primary/30">Private</span>
+</div>
+<div class="h-24 w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC_evyLWUreThom5GgnP152bC5BW46u-BA5OiDTnu4RQ_qmxlWeLTkV00RlSp0WZ9UasZ4-0vWhs5W_F0vNfViVMxehliK-HCW2O5-YHIuq4x6BiHMDI6H6DPqC4rK8fBkQEx6f_XC4Ck-QeH7uf-4WkYowGq-sfZgXLUdy0p5EESNgpxXAbA39yz9CPqceqT9IpB7cvYkYDmrj7EeWS6GwvlgEwPqfTNpESy3lWkUi-rWjzIZb9pRdUx4H8Yn0OxZ-vk0gtqfLGgjO");'></div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl bg-slate-100/5 dark:bg-slate-800/20 p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold text-slate-900 dark:text-white">Reading List</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">8 items</p>
+<p class="text-xs text-slate-400 dark:text-slate-500">Updated 1w ago</p>
+</div>
+<span class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary dark:bg-primary/30">Unlisted</span>
+</div>
+<div class="h-24 w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbWCKnVWtVHoHU4ro-ceTowwo_Gq3F7Sx_LZuJeoP_T1_K2LiGCBDVhI7soUkcP6F87_Lyf65JkSSytyn-5HeTX4dI33Kf-0CTPfgr2tpYfMYDeK-VJQgHHNV6n-3Z53ySUxTJzSGmYdLdoE2so_Yw5m-NXGlx1rt4W2DZqOF3HK1DdR552H0GXQz4JqXuPilQ0luo6uCzT6ZLfEL1v94oELoZampQLjjDyZTC0vXj9TKKPwY_cNb_v7-ClJalDSKEU0MR4u9qX2_D");'></div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl bg-slate-100/5 dark:bg-slate-800/20 p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold text-slate-900 dark:text-white">Podcast Queue</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">20 items</p>
+<p class="text-xs text-slate-400 dark:text-slate-500">Updated 3w ago</p>
+</div>
+<span class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary dark:bg-primary/30">Public</span>
+</div>
+<div class="h-24 w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9qxbgxdtwC901-yfehJwXb8WNugmjBShPVRPgZIzuyyICX2AmNZakfSyJ4Df48FB3BIe7dUZ6Z6c_llaENnIZx7tjnMMcOkC1b0gDMSCHLO0ONNgtQR6DOuJi74fndlaU-27nDrGpcrjvhtyPz0jIErtZuc4Zy6CUPx3ba7VOUv5I9vE9G-WXdc3q0HhlRN6_AqIM9sD-63kFZdXgEkZ5d1BQPg2a9c4QEuwFRODn4u1D51TRI2cyprfjCTzdp9vVdAVL7HYbiuRD");'></div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl bg-slate-100/5 dark:bg-slate-800/20 p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<h2 class="text-base font-bold text-slate-900 dark:text-white">Game Backlog</h2>
+<p class="text-sm text-slate-500 dark:text-slate-400">15 items</p>
+<p class="text-xs text-slate-400 dark:text-slate-500">Updated 1m ago</p>
+</div>
+<span class="rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary dark:bg-primary/30">Private</span>
+</div>
+<div class="h-24 w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPVosapTgr0Af7ahY6HLqy21P6ekpjTxl2LhcDmBvT-X2lnq9yRkimPyTw0zd1Poyb2j6iQU-R-OODRrVRVbpjs6Vu8Hwq7QE8xwq1M1aTPd_kMyu0zF3vaxZD6MsDDZyViSmSaK-xDHE3bEyhGrtQmieKBj0ply9UztDMRZfrBKeUckNBwJpZ3mcw7obru1iWxroXZo9MWLuvaJqSZtdWKxzDxSb9sZy9PmVnWQWFM041bb-opXZNDhIoqKmLAX1LTy4khoWKSMUT");'></div>
+</div>
+</div>
+</main>
+<div class="sticky bottom-0 z-10 p-4">
+<button class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 text-base font-bold text-white shadow-lg shadow-primary/30 transition-transform active:scale-95">
+<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+</svg>
+<span>New List</span>
+</button>
+</div>
+<footer class="sticky bottom-0 z-0 border-t border-slate-200/10 dark:border-slate-700/50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<nav class="flex items-center justify-around px-4 pb-3 pt-2">
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,16V152H179.31L160,171.31a15.86,15.86,0,0,1-11.31,4.69H107.31a15.86,15.86,0,0,1-11.31-4.69L76.69,152H48V48ZM48,168H76.69L96,187.31A15.86,15.86,0,0,0,107.31,192h41.38a15.86,15.86,0,0,0,11.31-4.69L179.31,168H208v40H48Z"></path>
+</svg>
+<span class="text-xs font-medium">Inbox</span>
+</a>
+<a class="flex flex-col items-center gap-1 rounded-full text-primary" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M48,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H56A8,8,0,0,1,48,64Zm168,56H56a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H56a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM24,56a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0V64A8,8,0,0,0,24,56Zm0,64a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,24,120Zm0,64a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,24,184Z"></path>
+</svg>
+<span class="text-xs font-medium">Lists</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96v16a40,40,0,0,0,16,32v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V144a40,40,0,0,0,16-32ZM54,48H202l11.42,40H42.61ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,73.6-16H118.4a40,40,0,0,0,73.6,16,40.57,40.57,0,0,0,8-.8Z"></path>
+</svg>
+<span class="text-xs font-medium">Marketplace</span>
+</a>
+</nav>
+</footer>
+</div>
+
+</body></html>

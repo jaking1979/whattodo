@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WhatToDo - Public List</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#18b9a9",
+              "background-light": "#f6f8f8",
+              "background-dark": "#11211f",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center justify-between p-4">
+<button class="text-slate-800 dark:text-slate-200 p-2">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold text-slate-900 dark:text-white flex-1 text-center">Watchlist</h1>
+<button class="text-slate-800 dark:text-slate-200 p-2">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-28">
+<div class="p-4 space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-24 h-24 rounded-full bg-cover bg-center bg-no-repeat shadow-md" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuextgrBFVluQogtmyXPUexk24CAT9CUPvfGGdLGijOwS_JsxXZrVEz0HFifzfcnkNvC4s2zP2-OtWxEjSDzQAMgwui4tJdj-whA1GOoexG1jcLpoY_dzR1knuYowYH-Q10fc3AxB1cGY2J_o8Dxq-42R04A-kBkCrHZD6DzCSn7lLml1BRu9ZPPfTZBcjkhXm0EJI5hmRE3e6zX4vIfpcPqHOtskkN7bWakOqJs9mZAl0p86UGh0VHFYx3vnlJ5XZM-42ZGin0XKP");'></div>
+<div class="flex flex-col">
+<p class="text-xl font-bold text-slate-900 dark:text-white">Ethan Carter</p>
+<p class="text-base text-slate-500 dark:text-slate-400">@ethan_carter</p>
+</div>
+</div>
+<button class="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">cached</span>
+<span class="truncate">Remix This List</span>
+</button>
+<div class="space-y-2">
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2y4scqJVhzr9-Juq7br7e0dP9OaFVvW0dBGO-pJXKwLx4iD7gsL8xURa7L5LEEeRt5oN_XvZOqNfBh6QagfN9gJgfdZsJjNeTD-vizApuRWI9H7LVNoixquwOfbFqCg0bhl9zghCZadyOeBE35huSj44LlQ9yOAO29FDCiO45buPpMVW4ubsQQUYnDP9RTSPEO1dhaCBNN8AruGE7DEm9W7SnB9aD1ZMvQwXnA0nNeqli5Xjpedrlc03QeUIpTocQOMojqINUNGYi");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">The Grand Budapest Hotel</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Movie</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDGcMvxdJZd-PBn1T08nmjI5Jwsp9cVj4RGJxJIMn17EK1YXwxRuqbKvCuT9NaXqiAXzeHiymsDX5UaiQk-fsR4QHAgm0pAZXa0qB3fTQAT6epGzCYZxwYFXisxjqXATgBO9P23ac3nVdRGe1RerjmRaef0tLgPF87GwaY_s8moHSSBl0jxdO-XPxoBREFvYJnclCLVF_P9dZL9dDZC_7XNQXhRgVT9DuK_Dy76h7s-2SqWBGjsJXJrKwQfQwcpe0Cl8qQ9gVU7FPGk");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">Stranger Things</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">TV Show</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAgGuaZ7tzYZ2yovC9OkKTC5Jvi3eGJrp8KxImidnOHvBoXhj5YQWzDoPw7NXU-s6UO45hZsRI7UYmOWCEmT-ilN48MNnvMiXhnkBTa0kl6mryDWRL80_Inzuwz-Kyvu2D07DGlxVJUaMtz0jQNwgvtTyzNBF8rZovP6dl0vONaqL8NcM-Ytrzh0l9NpTBSB0n77q8_HQFYlxt2hk-4AG0BZrSLW2YyM1bS8qRVf8ztuVV48A6FqTqnW830ULeuD1x0qZ9Zboew6fzu");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">Sapiens: A Brief History of Humankind</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Book</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDv7mHKCh0wGik4OfWOqH-DT1FyffBTId_89DaLqBExgTbvil8uJi8VXVbMsUPYXgroyyn6joBzao-iOM692ANQfw_PkIZqTnVZBvOGmP1wl9ACb5bOGsKEZxj2tOYPRBoURA_T3TTH1nwctZutwkTqq-P1QliGi1YXnNhXR1m38-IfxUJ4qi7iff9PjaPePjU1g6PE_Pdm4X49CP4LJbG7PteVZBThxQfRf1oZ_E5VIviOJ7cPTErX10XF5elNp4NDGCJ5ds0QSoR");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">The Daily</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Podcast</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxLlL1O5UlLs0NXK6mfSY9qT_fr0NBYCayrsWm3TgFM1rK7WtS7frOld5JeyJDA-fPUrmqE3vrPCGKOd-6ZpV4QFiH26atrnOmjTlSMaZ3V7dQmfiqQ6DOMO3-3PVguNq4AUWxqSLGQ6u1sM0SUTrvtvxfazTdrL-mhgTPHEVxjMS43YvXm3Fvq8XQgvRa-lZbNmKuv3H_RmuYfIz1YncQci8XxeTXI50oogOBLKFpkEvyZdP9PTTG1EEBAMiwORHi_nw-WBszLbN6");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">The Legend of Zelda: Breath of the Wild</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Game</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-xl bg-white/5 dark:bg-black/10">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA29YKQWCKx1tbjvT7Bf8D96se965xgsfmYfqnAcVNNEecnBeNDuwENWaimo9VIOSX95EPBiS3QNUt-9gpDvJ_MIWs2-3b4tRYX4EfhdgvpIWQhtOYeNLhVSy-N1dNHCL7am_3gdJNszeh0yiJ6oM-MunZXrYKKYY8H2d5axPGvx1NOkAw-7HmADV1rRdbRZWxspX-g83Ow-WrJVC0eimLHbZCZ7pjDNECfjIfs52WhU2ejICvHBERwI48KnQYa6GPvkILr9ncCCYQH");'></div>
+<div class="flex-1">
+<p class="font-medium text-slate-900 dark:text-white">The Verge</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Link</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-t border-slate-200/20 dark:border-slate-800/30">
+<div class="flex justify-around items-center px-4 pt-2 pb-4">
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">inbox</span>
+<span class="text-xs font-medium">Inbox</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">list_alt</span>
+<span class="text-xs font-bold">Lists</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="text-xs font-medium">Marketplace</span>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

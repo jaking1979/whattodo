@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Remix Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#18b9a9",
+            "background-light": "#f6f8f8",
+            "background-dark": "#11211f",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex items-end justify-center min-h-screen">
+<div aria-hidden="true" class="fixed inset-0 bg-black/50"></div>
+<div class="relative w-full max-w-sm p-4 bg-background-light dark:bg-background-dark rounded-t-xl shadow-lg">
+<div class="flex justify-center mb-4">
+<div class="w-10 h-1.5 bg-primary/20 dark:bg-primary/30 rounded-full"></div>
+</div>
+<div class="text-center p-4">
+<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Remix this list?</h2>
+<p class="text-gray-600 dark:text-gray-400 mb-8">This will copy the list to your collection. You can then edit it as you wish.</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="w-full h-12 px-6 font-bold text-gray-700 dark:text-gray-300 bg-primary/20 dark:bg-primary/30 rounded-lg hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors">
+            Cancel
+          </button>
+<button class="w-full h-12 px-6 font-bold text-background-dark bg-primary rounded-lg hover:opacity-90 transition-opacity">
+            Confirm Remix
+          </button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

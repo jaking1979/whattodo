@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WhatToDo - Settings</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#18b9a9",
+              "background-light": "#f6f8f8",
+              "background-dark": "#11211f",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center p-4">
+<button class="flex items-center justify-center w-10 h-10 text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="flex-1 text-lg font-bold text-center text-gray-900 dark:text-white mr-10">Settings</h1>
+</div>
+</header>
+<main class="flex-1 px-4 py-6 space-y-8">
+<section class="space-y-4">
+<h2 class="px-4 text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">Account</h2>
+<div class="bg-white/5 dark:bg-black/20 rounded-xl shadow-sm">
+<ul class="divide-y divide-gray-200/5 dark:divide-gray-700/50">
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10 rounded-t-xl">
+<img alt="User Avatar" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLGhlAUEowHC5wvRntxqKQsWNqNHCXzuUShZITYdhlcKSSdjd3GcvVBkj1Ed62zj1ad6_O80WCbsF3oZN1dou8H7FPVLgcGq_AkX3C-Ijappaxf7VPCKM7mixod9Nn4SG2kAHoCvyyNG2NZ1MJC40RfkQU6cn9ClSo2QPWwFGyez6bIYOeqGwl7WPFL4ZAPgaPgkXPFn1tm5rbbschV7rYKfoXQlaj77VgTzt_mhXEO4q2nTKOT1nM8IdOI_pfcJQNed8OrpZk1Fpd"/>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Profile</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">View and edit your profile</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Email</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Change your email address</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10 rounded-b-xl">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Password</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Update your password</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+</ul>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="px-4 text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">Preferences</h2>
+<div class="bg-white/5 dark:bg-black/20 rounded-xl shadow-sm">
+<ul class="divide-y divide-gray-200/5 dark:divide-gray-700/50">
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10 rounded-t-xl">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Notifications</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Manage your notifications</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Privacy</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Adjust your privacy settings</p>
+</div>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 rounded-b-xl">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-gray-900 dark:text-white">Dark Mode</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white dark:peer-checked:after:border-gray-800 after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</li>
+</ul>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="px-4 text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">App Information</h2>
+<div class="bg-white/5 dark:bg-black/20 rounded-xl shadow-sm">
+<ul class="divide-y divide-gray-200/5 dark:divide-gray-700/50">
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10 rounded-t-xl">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+<p class="flex-1 font-medium text-gray-900 dark:text-white">About</p>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">help</span>
+</div>
+<p class="flex-1 font-medium text-gray-900 dark:text-white">Help</p>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+<li class="flex items-center gap-4 p-4 cursor-pointer hover:bg-primary/10 rounded-b-xl">
+<div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<p class="flex-1 font-medium text-gray-900 dark:text-white">Terms of Service</p>
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
+</li>
+</ul>
+</div>
+</section>
+<div class="pt-4 pb-6">
+<button class="w-full h-12 px-6 font-bold text-white transition-colors duration-300 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+                    Logout
+                </button>
+</div>
+</main>
+</div>
+
+</body></html>
