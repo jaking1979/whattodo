@@ -5,43 +5,53 @@ import { generateHandleFromEmail } from '@/lib/utils/handle'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
+  const next = requestUrl.searchParams.get('next') || '/app/lists'
   const origin = requestUrl.origin
 
   if (code) {
     const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
-    if (!error) {
-      // Get the current user
-      const { data: { user } } = await supabase.auth.getUser()
+    if (error) {
+      console.error('Auth callback error:', error)
+      // Redirect to login with error message
+      return NextResponse.redirect(
+        `${origin}/login?error=${encodeURIComponent('Authentication failed. Please try again.')}`
+      )
+    }
 
-      if (user) {
-        // Check if profile exists
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single()
+    if (data.user) {
+      // Check if profile exists
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .single()
 
-        // Create profile if it doesn't exist
-        if (!profile) {
-          const handle = generateHandleFromEmail(user.email || '')
-          
+      // Create profile if it doesn't exist
+      if (!profile) {
+        const handle = generateHandleFromEmail(data.user.email || '')
+        
+        try {
           await (supabase.from('profiles') as any).insert({
-            id: user.id,
+            id: data.user.id,
             handle: handle,
-            display_name: user.email?.split('@')[0] || handle,
-            avatar_url: user.user_metadata?.avatar_url || null,
+            display_name: data.user.email?.split('@')[0] || handle,
+            avatar_url: data.user.user_metadata?.avatar_url || null,
           })
+        } catch (profileError) {
+          console.error('Profile creation error:', profileError)
         }
       }
 
-      // Redirect to app
-      return NextResponse.redirect(`${origin}/app/lists`)
+      // Successful authentication - redirect to app
+      return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
-  // Return to login if there was an error
-  return NextResponse.redirect(`${origin}/login`)
+  // No code or invalid request - return to login
+  return NextResponse.redirect(
+    `${origin}/login?error=${encodeURIComponent('Invalid authentication link.')}`
+  )
 }
 
