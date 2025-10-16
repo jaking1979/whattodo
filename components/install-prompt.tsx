@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { X } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>
@@ -103,6 +104,14 @@ export function InstallPrompt() {
   }
 
   const isIOS = typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent)
+  const isChrome = typeof window !== 'undefined' && /CriOS/.test(navigator.userAgent)
+  const isIOSChrome = isIOS && isChrome
+
+  const copyUrlAndShowInstructions = () => {
+    const url = window.location.href
+    navigator.clipboard.writeText(url)
+    toast.success('URL copied! Now open Safari and paste the link.')
+  }
 
   return (
     <Dialog open={showPrompt} onOpenChange={setShowPrompt}>
@@ -131,14 +140,47 @@ export function InstallPrompt() {
               </p>
             </div>
 
-            {isIOS ? (
-              <div className="space-y-3 text-left bg-card/30 p-4 rounded-lg">
-                <p className="text-sm font-semibold">To install on iOS:</p>
-                <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
-                  <li>Tap the <strong>Share</strong> button in Safari</li>
-                  <li>Scroll down and tap <strong>&quot;Add to Home Screen&quot;</strong></li>
-                  <li>Tap <strong>&quot;Add&quot;</strong> to confirm</li>
-                </ol>
+            {isIOSChrome ? (
+              <div className="space-y-3">
+                <div className="text-left bg-card/30 p-4 rounded-lg space-y-3">
+                  <p className="text-sm font-semibold text-center">Chrome on iOS doesn&apos;t support PWA installation.</p>
+                  <p className="text-sm text-muted-foreground">To install, please open this page in Safari:</p>
+                  <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
+                    <li>Tap <strong>&quot;Copy URL & Open Safari&quot;</strong> below</li>
+                    <li>Paste the URL in Safari and open it</li>
+                    <li>Tap the <strong>Share</strong> button in Safari</li>
+                    <li>Tap <strong>&quot;Add to Home Screen&quot;</strong></li>
+                  </ol>
+                </div>
+                <button
+                  onClick={copyUrlAndShowInstructions}
+                  className="w-full h-12 rounded-xl bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-colors"
+                >
+                  Copy URL & Open Safari
+                </button>
+                <button
+                  onClick={handleDismiss}
+                  className="w-full h-12 rounded-xl bg-primary/20 dark:bg-primary/30 font-bold hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors"
+                >
+                  Maybe Later
+                </button>
+              </div>
+            ) : isIOS ? (
+              <div className="space-y-3">
+                <div className="text-left bg-card/30 p-4 rounded-lg">
+                  <p className="text-sm font-semibold mb-2">To install on iOS Safari:</p>
+                  <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
+                    <li>Tap the <strong>Share</strong> button (square with arrow)</li>
+                    <li>Scroll down and tap <strong>&quot;Add to Home Screen&quot;</strong></li>
+                    <li>Tap <strong>&quot;Add&quot;</strong> to confirm</li>
+                  </ol>
+                </div>
+                <button
+                  onClick={handleDismiss}
+                  className="w-full h-12 rounded-xl bg-primary/20 dark:bg-primary/30 font-bold hover:bg-primary/30 dark:hover:bg-primary/40 transition-colors"
+                >
+                  Got It
+                </button>
               </div>
             ) : (
               <div className="space-y-3">

@@ -25,10 +25,16 @@ export function PublishToMarketplaceDialog({
     category: '',
     tags: '',
     isIndexable: true,
+    isSoberContent: false,
   })
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async () => {
+    if (!formData.isSoberContent) {
+      toast.error('Please confirm this list contains only sober/family-friendly content')
+      return
+    }
+
     setLoading(true)
     try {
       const response = await fetch('/api/marketplace/publish', {
@@ -41,13 +47,14 @@ export function PublishToMarketplaceDialog({
           category: formData.category || null,
           tags: formData.tags ? formData.tags.split(',').map(t => t.trim()) : null,
           is_indexable: formData.isIndexable,
+          is_sober_content: formData.isSoberContent,
         }),
       })
 
       const result = await response.json()
 
       if (response.ok) {
-        toast.success('Published to marketplace!')
+        toast.success('Published to Exchange!')
         onOpenChange(false)
         router.push(`/m/${result.data.slug}`)
       } else {
@@ -68,7 +75,8 @@ export function PublishToMarketplaceDialog({
         </div>
         
         <div className="px-6 pt-4 pb-2">
-          <h2 className="text-xl font-bold">Publish List</h2>
+          <h2 className="text-xl font-bold">Publish to Exchange</h2>
+          <p className="text-sm text-muted-foreground mt-1">Share your list with the community</p>
         </div>
 
         <div className="px-6 py-4 space-y-4 overflow-y-auto max-h-[60vh]">
@@ -104,10 +112,12 @@ export function PublishToMarketplaceDialog({
               }}
             >
               <option value="">Category</option>
+              <option value="Sober Activities">Sober Activities</option>
               <option value="Movies">Movies</option>
               <option value="Books">Books</option>
               <option value="Games">Games</option>
               <option value="Podcasts">Podcasts</option>
+              <option value="Wellness">Wellness</option>
               <option value="Mixed">Mixed</option>
             </select>
           </div>
@@ -122,28 +132,53 @@ export function PublishToMarketplaceDialog({
             />
           </div>
 
-          <div className="flex items-center justify-between py-2">
-            <span className="text-base">Indexable for Marketplace</span>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                className="sr-only peer"
-                checked={formData.isIndexable}
-                onChange={(e) => setFormData({ ...formData, isIndexable: e.target.checked })}
-              />
-              <div className="w-11 h-6 bg-primary/20 peer-focus:outline-none rounded-full peer dark:bg-primary/30 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-            </label>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between py-2">
+              <div className="flex-1 pr-4">
+                <span className="text-base font-medium">Sober/Family-Friendly Content</span>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Required: This list contains only sober and family-friendly activities
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={formData.isSoberContent}
+                  onChange={(e) => setFormData({ ...formData, isSoberContent: e.target.checked })}
+                />
+                <div className="w-11 h-6 bg-primary/20 peer-focus:outline-none rounded-full peer dark:bg-primary/30 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+              </label>
+            </div>
+
+            <div className="flex items-center justify-between py-2">
+              <span className="text-base">Indexable for Search</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={formData.isIndexable}
+                  onChange={(e) => setFormData({ ...formData, isIndexable: e.target.checked })}
+                />
+                <div className="w-11 h-6 bg-primary/20 peer-focus:outline-none rounded-full peer dark:bg-primary/30 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+              </label>
+            </div>
           </div>
         </div>
 
         <div className="px-6 pt-4 pb-6">
           <button
             onClick={handleSubmit}
-            disabled={loading || !formData.title.trim()}
+            disabled={loading || !formData.title.trim() || !formData.isSoberContent}
             className="w-full h-12 bg-primary text-white rounded-lg text-base font-bold disabled:opacity-50"
           >
-            {loading ? 'Publishing...' : 'Publish'}
+            {loading ? 'Publishing...' : 'Publish to Exchange'}
           </button>
+          {!formData.isSoberContent && (
+            <p className="text-xs text-destructive mt-2 text-center">
+              Please confirm sober/family-friendly content to publish
+            </p>
+          )}
         </div>
       </DialogContent>
     </Dialog>

@@ -52,6 +52,16 @@ export async function POST(request: Request) {
     // Create marketplace listing
     const slug = generateUniqueSlug(validated.title)
 
+    // Validate sober content flag
+    const isSoberContent = (body as any).is_sober_content || false
+    
+    if (!isSoberContent) {
+      return NextResponse.json(
+        { error: 'List must be marked as sober/family-friendly content to publish to Exchange' },
+        { status: 400 }
+      )
+    }
+
     const { data, error } = await (supabase
       .from('marketplace_listings') as any)
       .insert({
@@ -64,6 +74,7 @@ export async function POST(request: Request) {
         tags: validated.tags,
         is_public: true,
         is_indexable: validated.is_indexable,
+        is_sober_content: isSoberContent,
       })
       .select()
       .single()

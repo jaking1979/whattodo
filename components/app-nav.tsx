@@ -72,7 +72,7 @@ export function AppNav({ user, profile }: AppNavProps) {
                   : 'text-muted-foreground'
               }`}
             >
-              Marketplace
+              Exchange
             </Link>
           </div>
         </div>
@@ -91,7 +91,7 @@ export function AppNav({ user, profile }: AppNavProps) {
           </Link>
           <Link href="/marketplace" className={`flex flex-col items-center gap-1 ${isActive('/marketplace') || isActive('/m/') ? 'text-primary' : 'text-muted-foreground'}`}>
             <Store className="h-6 w-6" />
-            <span className="text-xs font-medium">Marketplace</span>
+            <span className="text-xs font-medium">Exchange</span>
           </Link>
         </nav>
       </footer>

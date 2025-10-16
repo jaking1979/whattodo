@@ -36,7 +36,7 @@ export default function Home() {
             </Link>
             <Link href="/marketplace">
               <button className="h-12 px-6 rounded-xl bg-card border border-border hover:bg-primary/10 font-bold transition-colors">
-                Browse Lists
+                Browse Exchange
               </button>
             </Link>
           </div>

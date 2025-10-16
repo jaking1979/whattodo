@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { MoreVertical } from 'lucide-react'
+import { ItemMenu } from '@/components/item-menu'
 
 export default async function InboxPage() {
   const supabase = await createClient()
@@ -34,6 +34,7 @@ export default async function InboxPage() {
   }
 
   const items = (inboxList as any)?.items || []
+  const inboxId = (inboxList as any)?.id
 
   return (
     <main className="flex-grow p-4 space-y-2 pb-28">
@@ -55,10 +56,19 @@ export default async function InboxPage() {
                   <span className="inline-block text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium capitalize mt-1">
                     {item.type}
                   </span>
+                  {item.notes && (
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{item.notes}</p>
+                  )}
                 </div>
-                <button className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full text-muted-foreground hover:bg-primary/10">
-                  <MoreVertical className="h-5 w-5" />
-                </button>
+                <div className="flex-shrink-0">
+                  <ItemMenu
+                    itemId={item.id}
+                    itemTitle={item.title}
+                    currentStatus={item.status}
+                    currentNotes={item.notes}
+                    listId={inboxId}
+                  />
+                </div>
               </div>
             </div>
           ))}

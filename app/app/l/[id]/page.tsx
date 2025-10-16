@@ -1,8 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
-import { ChevronLeft, MoreVertical } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ItemMenu } from '@/components/item-menu'
 
 export default async function ListDetailPage({
   params,
@@ -95,14 +96,21 @@ export default async function ListDetailPage({
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold truncate">{item.title}</p>
                   <p className="text-sm text-muted-foreground capitalize">{item.type}</p>
+                  {item.notes && (
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{item.notes}</p>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="text-sm px-3 py-1 rounded-full bg-primary/10 text-primary font-medium capitalize">
                     {item.status}
                   </div>
-                  <button className="p-2 text-muted-foreground hover:bg-primary/10 rounded-full">
-                    <MoreVertical className="h-5 w-5" />
-                  </button>
+                  <ItemMenu
+                    itemId={item.id}
+                    itemTitle={item.title}
+                    currentStatus={item.status}
+                    currentNotes={item.notes}
+                    listId={id}
+                  />
                 </div>
               </div>
             )

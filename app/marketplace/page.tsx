@@ -11,7 +11,7 @@ export default async function MarketplacePage({
   const { query, category } = await searchParams
   const supabase = await createClient()
 
-  // Get marketplace listings
+  // Get marketplace listings - Filter by sober content only
   let queryBuilder = supabase
     .from('marketplace_listings')
     .select(`
@@ -21,6 +21,7 @@ export default async function MarketplacePage({
     `)
     .eq('is_public', true)
     .eq('is_indexable', true)
+    .eq('is_sober_content', true)
 
   if (query) {
     queryBuilder = queryBuilder.or(`title.ilike.%${query}%,summary.ilike.%${query}%`)
@@ -76,10 +77,10 @@ export default async function MarketplacePage({
       <div className="space-y-4 p-4 pb-28">
         {!listingsWithCounts || listingsWithCounts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 px-4">
-            <div className="text-6xl mb-4">🏪</div>
+            <div className="text-6xl mb-4">🔄</div>
             <h3 className="text-xl font-bold mb-2">No listings found</h3>
             <p className="text-muted-foreground text-center max-w-sm">
-              Check back later for curated lists from the community
+              Check back later for sober and family-friendly lists from the community
             </p>
           </div>
         ) : (

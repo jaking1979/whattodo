@@ -161,6 +161,8 @@ export interface Database {
           tags: string[] | null
           is_public: boolean
           is_indexable: boolean
+          is_sober_content: boolean
+          admin_approved: boolean | null
           forked_from_list_id: string | null
           created_at: string
         }
@@ -175,6 +177,8 @@ export interface Database {
           tags?: string[] | null
           is_public?: boolean
           is_indexable?: boolean
+          is_sober_content?: boolean
+          admin_approved?: boolean | null
           forked_from_list_id?: string | null
           created_at?: string
         }
@@ -189,6 +193,8 @@ export interface Database {
           tags?: string[] | null
           is_public?: boolean
           is_indexable?: boolean
+          is_sober_content?: boolean
+          admin_approved?: boolean | null
           forked_from_list_id?: string | null
           created_at?: string
         }
