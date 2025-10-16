@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AppNav } from '@/components/app-nav'
+import { InstallPrompt } from '@/components/install-prompt'
 
 export default async function AppLayout({
   children,
@@ -25,6 +26,7 @@ export default async function AppLayout({
     <div className="min-h-screen flex flex-col">
       <AppNav user={user} profile={profile} />
       {children}
+      <InstallPrompt />
     </div>
   )
 }
